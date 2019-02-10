@@ -18,7 +18,7 @@ import main.conn.ConnectionUtils;
 import main.conn.MyUtils;
 import utils.DBUtils;
 
-@WebFilter(filterName="cookieFilter", urlPatterns= {"/*"})
+//@WebFilter(filterName="cookieFilter", urlPatterns= {"/*"})
 public class CookieFilter implements Filter {
 
 	@Override

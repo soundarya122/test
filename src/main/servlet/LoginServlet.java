@@ -23,6 +23,7 @@ import javax.servlet.http.HttpSession;
 
 import main.beans.Topic;
 import main.beans.UserAccount;
+import main.conn.ConnectionUtils;
 import main.conn.MyUtils;
 import utils.DBUtils;
 
@@ -53,14 +54,14 @@ public class LoginServlet extends HttpServlet {
 			hasError = true;
 			errorString = "Required username and password";
 		}else {
-			conn = MyUtils.retrieveConnection(request);
 			try {
+				conn = ConnectionUtils.getConnection();
 				user = DBUtils.findUser(conn, username);
 				if(user == null) {
 					hasError = true;
 					errorString = "Username or password invalid";
 				}
-			}catch(SQLException e) {
+			}catch(SQLException | ClassNotFoundException e) {
 				e.printStackTrace();
 				errorString = e.getMessage();
 			}

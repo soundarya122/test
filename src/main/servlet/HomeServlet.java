@@ -14,15 +14,24 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-@WebServlet(urlPatterns= {"/home"})
+import main.beans.UserAccount;
+import main.conn.MyUtils;
+
+@WebServlet(urlPatterns= {"/index.html"})
 public class HomeServlet extends HttpServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		
-		RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher("/WEB-INF/views/homeView.jsp");
-		dispatcher.forward(req, resp);
+		UserAccount user = MyUtils.retrieveUser(req.getSession());
+		RequestDispatcher dispatcher = null;
+		if(user == null) {
+			dispatcher = this.getServletContext().getRequestDispatcher("/login");
+			dispatcher.forward(req, resp);
+		}else {
+			resp.sendRedirect(req.getContextPath()+"/userInfo");
+		}
 	}
 
 	@Override

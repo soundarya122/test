@@ -18,7 +18,7 @@ import javax.servlet.http.HttpServletRequest;
 import main.conn.ConnectionUtils;
 import main.conn.MyUtils;
 
-@WebFilter(filterName = "jdbcFilter", urlPatterns = { "/*" })
+//@WebFilter(filterName = "jdbcFilter", urlPatterns = { "/*" })
 public class JDBCFilter implements Filter {
 
 	@Override

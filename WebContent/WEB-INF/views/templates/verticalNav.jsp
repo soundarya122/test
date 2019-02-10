@@ -1,4 +1,3 @@
-
 <!-- Top Navbar -->
 <%@page import="java.util.Iterator"%>
 <%@page import="java.util.Map.Entry"%>
@@ -175,7 +174,7 @@
 					</div>
 				</div>
 				<div class="dropdown-divider"></div>
-				<a class="dropdown-item" href="#"><i
+				<a class="dropdown-item" href="logout"><i
 					class="dropdown-icon zmdi zmdi-power"></i><span>Log out</span></a>
 			</div></li>
 	</ul>
@@ -325,6 +324,7 @@
 				
 					<%
 						Map listMenus = (Map) request.getSession().getAttribute("listMenus");
+						if(listMenus != null){
 						Iterator<Map.Entry<String, Map>> entries = listMenus.entrySet().iterator();
 						
 						while (entries.hasNext()) {
@@ -360,14 +360,14 @@
 								
 								%>
 							</li>
-						<%} %>
+						<%} }%>
 				</ul>
 			</li>
 			</ul>
 		</div>
 	</div>
 </nav>
-<div id="hk_nav_backdrop" class="hk-nav-backdrop"></div>
+ <div id="hk_nav_backdrop" class="hk-nav-backdrop"></div>
 <!-- /Vertical Nav -->
 
 <!-- Setting Panel -->
