@@ -9,6 +9,7 @@
 		href="dashboard1.html"> <img class="brand-img d-inline-block"
 		src="dist/img/logo-light.png" alt="brand" />
 	</a>
+	hi hello
 	<ul class="navbar-nav hk-navbar-content">
 		<li class="nav-item"><a id="navbar_search_btn"
 			class="nav-link nav-link-hover" href="javascript:void(0);"><span
@@ -348,8 +349,11 @@
 												while (subMenuLevel1.hasNext()) {
 													Map.Entry<String, Map> subEntries1 = subMenuLevel1.next();
 													counter++;
+													
+													String s1 = dataTarget+"?topics="+subEntries1.getValue();
+													
 												%><li class="nav-item"><a class="nav-link"
-														href="<%=subEntries1.getValue()%>"><%=counter%>) <%=subEntries1.getKey()%></a></li><%
+														href="<%=s1%>"><%=counter%>) <%=subEntries1.getKey()%></a></li><%
 												}
 												%></ul>
 											</li>

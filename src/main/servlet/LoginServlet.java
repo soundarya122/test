@@ -81,36 +81,6 @@ public class LoginServlet extends HttpServlet {
 			if(remember) {
 				MyUtils.storeUserCookie(response, user);
 			}
-			
-			List<Topic> topicList=null;
-			try {
-				topicList = DBUtils.topics(conn);
-			}catch(SQLException e) {
-				e.printStackTrace();
-			}
-			
-			Map<String, Map<String, String>> listMenus = new HashMap<String, Map<String, String>>();
-			Map<String, String> list = null;
-			for(Topic topic:topicList) {
-				String parentName = topic.getParentId()+". "+topic.getParent();
-				if(topic.getName() != null) {
-					String topicName = topic.getName().replace(",", "");
-					if(listMenus.containsKey(parentName)) {
-						list = listMenus.get(parentName);
-						list.put(topicName, topic.getLink());
-					} else {
-						list = new HashMap<>();
-						list.put(topicName, topic.getLink());
-						listMenus.put(parentName, list);
-					}
-				}else {
-					list = new HashMap<>();
-					listMenus.put(parentName, list);
-				}
-			}
-			SortedMap<String, Map<String, String>> sortedMap = new TreeMap(new MyCompartor());
-			sortedMap.putAll(listMenus);
-			session.setAttribute("listMenus", sortedMap);
 			response.sendRedirect(request.getContextPath()+"/userInfo");
 		}
 	}
