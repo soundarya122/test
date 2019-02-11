@@ -303,7 +303,7 @@
 						<li class="nav-item">
 							<ul class="nav flex-column">
 								<li class="nav-item"><a class="nav-link"
-									href="profile.html">Profile</a></li>
+									href="productList">Product List</a></li>
 								<li class="nav-item active"><a class="nav-link"
 									href="invoice.html">Invoice</a></li>
 								<li class="nav-item"><a class="nav-link"
@@ -329,7 +329,6 @@
 						
 						while (entries.hasNext()) {
 							Map.Entry<String, Map> entry = entries.next();
-							System.out.println("k1: "+ entry.getKey());
 							String dataTarget = entry.getKey().replace(" ", "_").replace(",", "_").replace(".", "_");
 							%>
 							<li class="nav-item"><a class="nav-link"

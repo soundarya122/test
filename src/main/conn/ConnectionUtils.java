@@ -17,7 +17,7 @@ public class ConnectionUtils {
 		String pwd = rb.getString("password");
 		String connURL = "jdbc:mysql://"+hostName+":3306/"+dbName;
 		
-		Class.forName("com.mysql.jdbc.Driver");
+		Class.forName("com.mysql.cj.jdbc.Driver");
 		conn = DriverManager.getConnection(connURL, user, pwd);
 		return conn;
 	}

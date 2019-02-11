@@ -3,6 +3,7 @@ package main.servlet;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
@@ -27,11 +28,12 @@ import main.conn.ConnectionUtils;
 import main.conn.MyUtils;
 import utils.DBUtils;
 
-@WebServlet(urlPatterns= {"/login"})
+@WebServlet(urlPatterns = { "/login" })
 public class LoginServlet extends HttpServlet {
 
 	@Override
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher("/WEB-INF/views/loginView.jsp");
 		dispatcher.forward(request, response);
@@ -91,31 +93,34 @@ public class LoginServlet extends HttpServlet {
 			Map<String, String> list = null;
 			for(Topic topic:topicList) {
 				String parentName = topic.getParentId()+". "+topic.getParent();
-				if(listMenus.containsKey(parentName)) {
-					list = listMenus.get(parentName);
-					list.put(topic.getName(), topic.getLink());
-				} else {
+				if(topic.getName() != null) {
+					String topicName = topic.getName().replace(",", "");
+					if(listMenus.containsKey(parentName)) {
+						list = listMenus.get(parentName);
+						list.put(topicName, topic.getLink());
+					} else {
+						list = new HashMap<>();
+						list.put(topicName, topic.getLink());
+						listMenus.put(parentName, list);
+					}
+				}else {
 					list = new HashMap<>();
-					list.put(topic.getName(), topic.getLink());
 					listMenus.put(parentName, list);
 				}
 			}
-			
-//			SortedMap<String, Map<String, String>> sortedMap = new TreeMap<>(());
-			
-			session.setAttribute("listMenus", listMenus);
+			SortedMap<String, Map<String, String>> sortedMap = new TreeMap(new MyCompartor());
+			sortedMap.putAll(listMenus);
+			session.setAttribute("listMenus", sortedMap);
 			response.sendRedirect(request.getContextPath()+"/userInfo");
 		}
 	}
 }
-class MyComparator implements Comparator<Topic>{
 
+class MyCompartor implements Comparator<String>{
 	@Override
-	public int compare(Topic o1, Topic o2) {
-		// TODO Auto-generated method stub
-		Integer i1 = o1.getParentId(); 
-		Integer i2 = o2.getParentId();
+	public int compare(String o1, String o2) {
+		Integer i1 = Integer.parseInt(o1.split("\\.")[0]);
+		Integer i2 = Integer.parseInt(o2.split("\\.")[0]);
 		return i1.compareTo(i2);
 	}
-	
 }
