@@ -1,3 +1,7 @@
+<%@page import="java.util.Locale"%>
+<%@page import="java.util.ResourceBundle"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+ pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -21,6 +25,12 @@
 <link href="dist/css/style.css" rel="stylesheet" type="text/css">
 </head>
 <body>
+	
+	<%
+		ResourceBundle rb = (ResourceBundle)session.getAttribute("rb");
+	%>
+
+
 	<!-- Preloader -->
 	<div class="preloader-it">
 		<div class="loader-pendulums"></div>
@@ -28,7 +38,6 @@
 	<!-- /Preloader -->
 	<!-- HK Wrapper -->
 	<div class="hk-wrapper hk-vertical-nav">
-
 		<jsp:include page="templates/verticalNav.jsp"></jsp:include>
 		<!-- Main Content -->
 		<div class="hk-pg-wrapper">
@@ -38,7 +47,7 @@
                 <!-- Title -->
                 <div class="hk-pg-header align-items-top">
                     <div>
-						<h2 class="hk-pg-title font-weight-600 mb-10">Welcome:  ${user.userName.toUpperCase()}</h2>
+						<h2 class="hk-pg-title font-weight-600 mb-10"><%=rb.getString("welcome") %>:  ${user.userName.toUpperCase()}</h2>
 					</div>
 				</div>
 			</div>

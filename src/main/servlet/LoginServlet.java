@@ -1,6 +1,7 @@
 package main.servlet;
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -9,7 +10,9 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
+import java.util.ResourceBundle;
 import java.util.SortedMap;
 import java.util.TreeMap;
 import java.util.stream.Collectors;
@@ -81,12 +84,20 @@ public class LoginServlet extends HttpServlet {
 			if(remember) {
 				MyUtils.storeUserCookie(response, user);
 			}
+			
+			String lang = request.getParameter("lang");
+			if(lang == null)
+				lang = "en";
+			ResourceBundle rb = ResourceBundle.getBundle("app", new Locale(lang));
+			HttpSession sess = request.getSession(false);
+			sess.setAttribute("rb", rb);
+			
 			response.sendRedirect(request.getContextPath()+"/userInfo");
 		}
 	}
 }
 
-class MyCompartor implements Comparator<String>{
+class MyCompartor implements Comparator<String>, Serializable{
 	@Override
 	public int compare(String o1, String o2) {
 		Integer i1 = Integer.parseInt(o1.split("\\.")[0]);

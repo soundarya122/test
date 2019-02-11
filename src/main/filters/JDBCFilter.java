@@ -3,54 +3,64 @@ package main.filters;
 import java.io.IOException;
 import java.sql.Connection;
 import java.util.Collection;
+import java.util.Locale;
 import java.util.Map;
+import java.util.ResourceBundle;
 
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRegistration;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import main.beans.UserAccount;
 import main.conn.ConnectionUtils;
 import main.conn.MyUtils;
 
-//@WebFilter(filterName = "jdbcFilter", urlPatterns = { "/*" })
+@WebFilter(filterName = "jdbcFilter", urlPatterns = { "/*" })
 public class JDBCFilter implements Filter {
 
 	@Override
 	public void destroy() {
 		// TODO Auto-generated method stub
-
 	}
 
 	@Override
-	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
+	public void doFilter(ServletRequest req, ServletResponse resp, FilterChain chain)
 			throws IOException, ServletException {
-		// TODO Auto-generated method stub
-		HttpServletRequest req = (HttpServletRequest)request;
-		Connection conn = null;
-		boolean filterRequired = needJDBC(req);
-//		System.out.println("---- JDBC FILTER.... >> "+ req.getServletPath()+" ..dbcheck required: "+ filterRequired);
-		if(filterRequired) {
-			try {
-				conn = ConnectionUtils.getConnection();
-				conn.setAutoCommit(false);
-	
-				MyUtils.storeConnection(request, conn);
-				chain.doFilter(request, response);
-				conn.commit();
-			} catch (Exception e) {
-				e.printStackTrace();
-			} finally {
-				ConnectionUtils.closeQuietly(conn);
-			}
-		}else {
-			chain.doFilter(request, response);
-		}
+		
+		System.out.println("... doFilter...");
+		
+		HttpServletRequest request = (HttpServletRequest) req;
+        HttpServletResponse response = (HttpServletResponse) resp;
+        String servletPath = request.getServletPath();
+        
+        UserAccount loginedUser = MyUtils.retrieveUser(request.getSession());
+        if (servletPath.equals("/login")) {
+            chain.doFilter(request, response);
+            return;
+        }
+        if (loginedUser == null) {
+        	System.out.println("user null");
+            response.sendRedirect(request.getContextPath() + "/login");
+            return;
+        }else {
+        	HttpSession sess = request.getSession(false);
+        	if(sess.getAttribute("rb")==null) {
+	        	String lang = "en";
+	    		ResourceBundle rb = ResourceBundle.getBundle("app", new Locale(lang));
+	    		sess.setAttribute("rb", rb);
+        	}
+        	System.out.println("user avialable");
+        }
+        chain.doFilter(request, response);
 
 	}
 

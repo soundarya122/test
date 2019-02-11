@@ -9,8 +9,25 @@
 		href="dashboard1.html"> <img class="brand-img d-inline-block"
 		src="dist/img/logo-light.png" alt="brand" />
 	</a>
-	hi hello
 	<ul class="navbar-nav hk-navbar-content">
+		<div class="col-sm">
+			<div class="button-list mb-15">
+				<button
+					class="btn btn-icon btn-icon-only btn-indigo btn-icon-style-4">
+					<a href="locale?lang=en"><span class="btn-icon-wrap"><img
+						src="images/flags/flag1.png"></a></span>
+				</button>
+				<button class="btn btn-icon btn-icon-only btn-sky btn-icon-style-4">
+					<a href="locale?lang=sp"><span class="btn-icon-wrap"><img
+						src="images/flags/flag2.png"></a></span>
+				</button>
+				<button
+					class="btn btn-icon btn-icon-only btn-danger btn-icon-style-4">
+					<a href="locale?lang=in"><span class="btn-icon-wrap"><img
+						src="images/flags/flag3.png"></a></span>
+				</button>
+			</div>
+		</div>
 		<li class="nav-item"><a id="navbar_search_btn"
 			class="nav-link nav-link-hover" href="javascript:void(0);"><span
 				class="feather-icon"><i data-feather="search"></i></span></a></li>
@@ -303,8 +320,8 @@
 						class="nav flex-column collapse collapse-level-1">
 						<li class="nav-item">
 							<ul class="nav flex-column">
-								<li class="nav-item"><a class="nav-link"
-									href="productList">Product List</a></li>
+								<li class="nav-item"><a class="nav-link" href="productList">Product
+										List</a></li>
 								<li class="nav-item active"><a class="nav-link"
 									href="invoice.html">Invoice</a></li>
 								<li class="nav-item"><a class="nav-link"
@@ -321,56 +338,57 @@
 			<div class="nav-header">
 				<span>User Interface</span> <span>UI</span>
 			</div>
-				<ul class="navbar-nav flex-column">
-				
-					<%
-						Map listMenus = (Map) request.getSession().getAttribute("listMenus");
-						if(listMenus != null){
+			<ul class="navbar-nav flex-column">
+
+				<%
+					Map listMenus = (Map) request.getSession().getAttribute("listMenus");
+					if (listMenus != null) {
 						Iterator<Map.Entry<String, Map>> entries = listMenus.entrySet().iterator();
-						
+
 						while (entries.hasNext()) {
 							Map.Entry<String, Map> entry = entries.next();
 							String dataTarget = entry.getKey().replace(" ", "_").replace(",", "_").replace(".", "_");
-							%>
-							<li class="nav-item"><a class="nav-link"
-								href="javascript:void(0);" data-toggle="collapse"
-								data-target="#<%=dataTarget%>"> <span class="feather-icon"><i
-										data-feather="layout"></i></span> <span class="nav-link-text"><%=entry.getKey()%></span></a>
-										<%
-								if(entry.getValue() instanceof Map){
+				%>
+				<li class="nav-item"><a class="nav-link"
+					href="javascript:void(0);" data-toggle="collapse"
+					data-target="#<%=dataTarget%>"> <span class="feather-icon"><i
+							data-feather="layout"></i></span> <span class="nav-link-text"><%=entry.getKey()%></span></a>
+					<%
+						if (entry.getValue() instanceof Map) {
 									Iterator<Map.Entry<String, Map>> subMenuLevel1 = entry.getValue().entrySet().iterator();
-									int counter=0;
-									%>
-									<ul id="<%=dataTarget%>"
-											class="nav flex-column collapse collapse-level-1">
-											<li class="nav-item">
-												<ul class="nav flex-column">
-												<%
-												while (subMenuLevel1.hasNext()) {
+									int counter = 0;
+					%>
+					<ul id="<%=dataTarget%>"
+						class="nav flex-column collapse collapse-level-1">
+						<li class="nav-item">
+							<ul class="nav flex-column">
+								<%
+									while (subMenuLevel1.hasNext()) {
 													Map.Entry<String, Map> subEntries1 = subMenuLevel1.next();
 													counter++;
-													
-													String s1 = dataTarget+"?topics="+subEntries1.getValue();
-													
-												%><li class="nav-item"><a class="nav-link"
-														href="<%=s1%>"><%=counter%>) <%=subEntries1.getKey()%></a></li><%
-												}
-												%></ul>
-											</li>
-									</ul>
-									<%
-								}
-								
+
+													String s1 = dataTarget + "?topics=" + subEntries1.getValue();
+								%><li class="nav-item"><a class="nav-link" href="<%=s1%>"><%=counter%>)
+										<%=subEntries1.getKey()%></a></li>
+								<%
+									}
 								%>
-							</li>
-						<%} }%>
-				</ul>
+							</ul>
+						</li>
+					</ul> <%
+ 	}
+ %></li>
+				<%
+					}
+					}
+				%>
+			</ul>
 			</li>
 			</ul>
 		</div>
 	</div>
 </nav>
- <div id="hk_nav_backdrop" class="hk-nav-backdrop"></div>
+<div id="hk_nav_backdrop" class="hk-nav-backdrop"></div>
 <!-- /Vertical Nav -->
 
 <!-- Setting Panel -->
