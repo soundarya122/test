@@ -14,7 +14,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import main.beans.Product;
 import main.conn.ConnectionUtils;
-import main.conn.MyUtils;
 import utils.DBUtils;
 
 @WebServlet(urlPatterns= {"/productList"})

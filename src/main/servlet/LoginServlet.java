@@ -28,7 +28,6 @@ import javax.servlet.http.HttpSession;
 import main.beans.Topic;
 import main.beans.UserAccount;
 import main.conn.ConnectionUtils;
-import main.conn.MyUtils;
 import utils.DBUtils;
 
 @WebServlet(urlPatterns = { "/login" })
@@ -79,29 +78,11 @@ public class LoginServlet extends HttpServlet {
 			RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher("/WEB-INF/views/loginView.jsp");
 			dispatcher.forward(request, response);
 		}else {
-			HttpSession session = request.getSession();
-			MyUtils.storeUser(session, user);
-			if(remember) {
-				MyUtils.storeUserCookie(response, user);
-			}
-			
-			String lang = request.getParameter("lang");
-			if(lang == null)
-				lang = "en";
-			ResourceBundle rb = ResourceBundle.getBundle("app", new Locale(lang));
-			HttpSession sess = request.getSession(false);
-			sess.setAttribute("rb", rb);
-			
+			HttpSession session = request.getSession(false);
+			session.setAttribute("user", user);
 			response.sendRedirect(request.getContextPath()+"/userInfo");
 		}
 	}
 }
 
-class MyCompartor implements Comparator<String>, Serializable{
-	@Override
-	public int compare(String o1, String o2) {
-		Integer i1 = Integer.parseInt(o1.split("\\.")[0]);
-		Integer i2 = Integer.parseInt(o2.split("\\.")[0]);
-		return i1.compareTo(i2);
-	}
-}
+

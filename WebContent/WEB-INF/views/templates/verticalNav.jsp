@@ -10,24 +10,14 @@
 		src="dist/img/logo-light.png" alt="brand" />
 	</a>
 	<ul class="navbar-nav hk-navbar-content">
-		<div class="col-sm">
-			<div class="button-list mb-15">
-				<button
-					class="btn btn-icon btn-icon-only btn-indigo btn-icon-style-4">
-					<a href="locale?lang=en"><span class="btn-icon-wrap"><img
-						src="images/flags/flag1.png"></a></span>
-				</button>
-				<button class="btn btn-icon btn-icon-only btn-sky btn-icon-style-4">
-					<a href="locale?lang=sp"><span class="btn-icon-wrap"><img
-						src="images/flags/flag2.png"></a></span>
-				</button>
-				<button
-					class="btn btn-icon btn-icon-only btn-danger btn-icon-style-4">
-					<a href="locale?lang=in"><span class="btn-icon-wrap"><img
-						src="images/flags/flag3.png"></a></span>
-				</button>
-			</div>
-		</div>
+
+		<li><a class="nav-link" href="locale?lang=en"><img
+				src="images/flags/flag1.png" /></a></li>
+		<li><a class="nav-link" href="locale?lang=sp"><img
+				src="images/flags/flag2.png" /></a></li>
+		<li><a class="nav-link" href="locale?lang=in"><img
+				src="images/flags/flag3.png" /></a></li>
+
 		<li class="nav-item"><a id="navbar_search_btn"
 			class="nav-link nav-link-hover" href="javascript:void(0);"><span
 				class="feather-icon"><i data-feather="search"></i></span></a></li>

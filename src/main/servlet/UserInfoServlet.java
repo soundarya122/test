@@ -1,8 +1,10 @@
 package main.servlet;
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -20,7 +22,6 @@ import javax.servlet.http.HttpSession;
 import main.beans.Topic;
 import main.beans.UserAccount;
 import main.conn.ConnectionUtils;
-import main.conn.MyUtils;
 import utils.DBUtils;
 
 @WebServlet(urlPatterns= {"/userInfo"})
@@ -37,13 +38,11 @@ public class UserInfoServlet extends HttpServlet {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
-		UserAccount user = MyUtils.retrieveUser(session);
+		UserAccount user = (UserAccount)session.getAttribute("user");
 		if(user == null) {
 			response.sendRedirect(request.getContextPath()+"/login");
 			return;
 		}
-		
-		MyUtils.storeUser(session, user);
 		
 		List<Topic> topicList=null;
 		try {
@@ -86,5 +85,12 @@ public class UserInfoServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
-
+}
+class MyCompartor implements Comparator<String>, Serializable{
+	@Override
+	public int compare(String o1, String o2) {
+		Integer i1 = Integer.parseInt(o1.split("\\.")[0]);
+		Integer i2 = Integer.parseInt(o2.split("\\.")[0]);
+		return i1.compareTo(i2);
+	}
 }

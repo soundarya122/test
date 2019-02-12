@@ -22,7 +22,6 @@ import javax.servlet.http.HttpSession;
 
 import main.beans.UserAccount;
 import main.conn.ConnectionUtils;
-import main.conn.MyUtils;
 
 @WebFilter(filterName = "jdbcFilter", urlPatterns = { "/*" })
 public class JDBCFilter implements Filter {
@@ -35,33 +34,22 @@ public class JDBCFilter implements Filter {
 	@Override
 	public void doFilter(ServletRequest req, ServletResponse resp, FilterChain chain)
 			throws IOException, ServletException {
-		
-		System.out.println("... doFilter...");
-		
+
 		HttpServletRequest request = (HttpServletRequest) req;
         HttpServletResponse response = (HttpServletResponse) resp;
+        System.out.println("---- jdbcFilter FILTER.... >> " + request.getServletPath());
+        
         String servletPath = request.getServletPath();
         
-        UserAccount loginedUser = MyUtils.retrieveUser(request.getSession());
-        if (servletPath.equals("/login")) {
-            chain.doFilter(request, response);
-            return;
-        }
-        if (loginedUser == null) {
-        	System.out.println("user null");
-            response.sendRedirect(request.getContextPath() + "/login");
-            return;
-        }else {
-        	HttpSession sess = request.getSession(false);
-        	if(sess.getAttribute("rb")==null) {
-	        	String lang = "en";
-	    		ResourceBundle rb = ResourceBundle.getBundle("app", new Locale(lang));
-	    		sess.setAttribute("rb", rb);
-        	}
-        	System.out.println("user avialable");
-        }
+        String lang = request.getParameter("lang");
+		if(lang == null)
+			lang = "en";
+		ResourceBundle rb = ResourceBundle.getBundle("app", new Locale(lang));
+		HttpSession sess = request.getSession(false);
+		if(sess.getAttribute("rb") == null) {
+			sess.setAttribute("rb", rb);
+		}
         chain.doFilter(request, response);
-
 	}
 
 	private boolean needJDBC(HttpServletRequest request) {

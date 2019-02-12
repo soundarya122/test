@@ -10,9 +10,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import main.beans.Product;
-import main.conn.MyUtils;
+import main.conn.ConnectionUtils;
 import utils.DBUtils;
 
 @WebServlet(urlPatterns= {"/createProduct"})
@@ -28,7 +29,14 @@ public class CreateProductServlet extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		Connection conn = MyUtils.retrieveConnection(request);
+		HttpSession session = request.getSession(false);
+		Connection conn = null;
+		try {
+			conn = ConnectionUtils.getConnection();
+		} catch (ClassNotFoundException | SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		String code = (String)request.getParameter("code");
 		String name = (String)request.getParameter("name");
 		String priceStr = (String)request.getParameter("price");

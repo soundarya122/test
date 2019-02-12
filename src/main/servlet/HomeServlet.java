@@ -15,7 +15,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import main.beans.UserAccount;
-import main.conn.MyUtils;
 
 @WebServlet(urlPatterns= {"/index.html"})
 public class HomeServlet extends HttpServlet {
@@ -24,7 +23,9 @@ public class HomeServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		
-		UserAccount user = MyUtils.retrieveUser(req.getSession());
+		HttpSession session = req.getSession(false);
+		
+		UserAccount user = (UserAccount) session.getAttribute("user");
 		RequestDispatcher dispatcher = null;
 		if(user == null) {
 			dispatcher = this.getServletContext().getRequestDispatcher("/login");
