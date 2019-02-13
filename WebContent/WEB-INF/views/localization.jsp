@@ -12,12 +12,13 @@
 <jsp:include page="templates/top.jsp"></jsp:include>
 <%
 	ResourceBundle rb = (ResourceBundle) session.getAttribute("rb");
+	String spath = request.getServletContext().getContextPath();
 	
 %>
 <script type="text/javascript">
 	function sendInfo() {
 		var v = document.vinform.t1.value;
-		var url = "http://192.168.1.16:8080/SimpleWebApp/test?val=" + v;
+		var url = document.vinform.t2.value+"/test?val=" + v;
 		if (window.XMLHttpRequest) {
 			request = new XMLHttpRequest();
 		} else if (window.ActiveXObject) {
@@ -73,8 +74,8 @@
 						<!-- <h5 class="hk-sec-title">Mode Switch Table</h5> -->
 						<p class="mb-40">1. Get list of available locales</p>
 						<form name="vinform">Display Country 
-							<input
-								name="t1" type="text" onkeyup="sendInfo()" />
+							<input name="t1" type="text" onkeyup="sendInfo()" />
+							<input name="t2" type="text" value="<%=spath %>" hidden="true" />
 								
 						</form>
 						<span id="amit"  onload="sendInfo()" style="padding: 10px;"> </span>  
