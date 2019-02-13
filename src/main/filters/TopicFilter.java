@@ -80,7 +80,7 @@ public class TopicFilter implements Filter {
 	 */
 	public void init(FilterConfig fConfig) throws ServletException {
 		// TODO Auto-generated method stub
-		availableTopics = "class_design,advanced_design,localization";
+		availableTopics = "class_design,advanced_design,jdbc,localization";
 		StringTokenizer str = new StringTokenizer(availableTopics, ",");
 		while(str.hasMoreTokens()) {
 			servlets.add(str.nextToken());

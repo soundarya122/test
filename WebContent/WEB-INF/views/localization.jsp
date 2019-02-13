@@ -18,7 +18,7 @@
 <script type="text/javascript">
 	function sendInfo() {
 		var v = document.vinform.t1.value;
-		var url = document.vinform.t2.value+"/test?val=" + v;
+		var url = document.vinform.t2.value+"/controller?id=localization&val=" + v;
 		if (window.XMLHttpRequest) {
 			request = new XMLHttpRequest();
 		} else if (window.ActiveXObject) {
@@ -84,30 +84,6 @@
 					</section>
 				</div>
 			</div>
-			
-			<!-- Title -->
-			<div class="hk-pg-header">
-				<h4 class="hk-pg-title">
-					<span class="pg-title-icon"><span class="feather-icon"><i
-							data-feather="smartphone"></i></span></span>Localization
-				</h4>
-			</div>
-			<!-- /Title -->
-
-			<div class="row">
-				<div class="col-xl-12">
-					<section class="hk-sec-wrapper">
-						<!-- <h5 class="hk-sec-title">Mode Switch Table</h5> -->
-						<p class="mb-40">1. Get list of available locales</p>
-						<form name="vinform1">Display Country 
-							<input
-								name="t1" type="text" onkeyup="sendInfo()" />
-								
-						</form>
-					</section>
-				</div>
-			</div>
-			
 		</div>
 		<!-- /Container -->
 

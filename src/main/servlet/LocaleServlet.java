@@ -27,7 +27,6 @@ public class LocaleServlet extends HttpServlet {
 		HttpSession sess = req.getSession(false);
 		sess.setAttribute("rb", rb);
 		
-//		System.out.println("sdfsd "+ req.getHeader("Referer")+":"+req.getContextPath()+":"+req.getServletPath());
 		String lastServlet = req.getHeader("Referer").split(req.getContextPath()+"/")[1];
 		resp.sendRedirect(lastServlet);
 	}
