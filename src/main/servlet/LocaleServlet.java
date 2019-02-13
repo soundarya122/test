@@ -21,7 +21,9 @@ public class LocaleServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		String lang = req.getParameter("lang");
-		ResourceBundle rb = ResourceBundle.getBundle("app", new Locale(lang));
+		Locale newLocale = new Locale(lang);
+		ResourceBundle rb = ResourceBundle.getBundle("app", newLocale);
+		Locale.setDefault(newLocale);
 		HttpSession sess = req.getSession(false);
 		sess.setAttribute("rb", rb);
 		

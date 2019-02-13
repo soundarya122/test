@@ -48,7 +48,7 @@ public class TopicFilter implements Filter {
 		// place your code here
 		HttpServletRequest request = (HttpServletRequest) req;
         HttpServletResponse response = (HttpServletResponse) resp;
-        System.out.println("----3) TopicFilter FILTER.... >> " + request.getServletPath());
+//        System.out.println("----3) TopicFilter FILTER.... >> " + request.getServletPath());
         String Uri = request.getServletPath().toLowerCase();
        
         for(int i=0; i<servlets.size(); i++) {
