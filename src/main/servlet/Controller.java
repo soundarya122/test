@@ -2,6 +2,8 @@ package main.servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -13,6 +15,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import main.beans.Product;
+import main.conn.ConnectionUtils;
+import utils.DBUtils;
 
 @WebServlet("/controller")
 public class Controller extends HttpServlet {
@@ -45,6 +51,36 @@ public class Controller extends HttpServlet {
 			}
 			out.println("</table>");
 		}
+		if(selectedTopic.equals("jdbc")) {
+			String pCode = req.getParameter("pCode");
+			String pName = req.getParameter("pName");
+			Float pPrice = Float.parseFloat(req.getParameter("pPrice"));
+			
+			Product product = new Product(pCode, pName, pPrice);
+			
+			Connection conn = null;
+			try {
+				conn = ConnectionUtils.getConnection();
+			} catch (ClassNotFoundException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			
+			List<Product> list = null;
+			try {
+				DBUtils.insertProduct(conn, product);
+				list = DBUtils.queryProduct(conn);
+			}catch(SQLException e) {
+				e.printStackTrace();
+			}
+			
+			
+			
+		}
+			
 	}
 
 	@Override
