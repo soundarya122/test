@@ -30,7 +30,7 @@ public class CookieFilter implements Filter {
 			throws IOException, ServletException {
 		HttpServletRequest req = (HttpServletRequest) request;
 		HttpServletResponse res = (HttpServletResponse) response;
-		System.out.println("---- 1) COOKIE FILTER.... >> " + req.getServletPath());
+//		System.out.println("---- 1) COOKIE FILTER.... >> " + req.getServletPath());
 		String Uri = req.getServletPath();
 		HttpSession session = req.getSession(false);
 

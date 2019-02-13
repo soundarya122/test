@@ -37,7 +37,7 @@ public class JDBCFilter implements Filter {
 
 		HttpServletRequest request = (HttpServletRequest) req;
         HttpServletResponse response = (HttpServletResponse) resp;
-        System.out.println("----2) jdbcFilter FILTER.... >> " + request.getServletPath());
+//        System.out.println("----2) jdbcFilter FILTER.... >> " + request.getServletPath());
         
         String servletPath = request.getServletPath();
         

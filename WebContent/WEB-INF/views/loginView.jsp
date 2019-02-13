@@ -97,7 +97,6 @@
 
 									<%
 										String errorString = (String)request.getAttribute("errorString");
-										System.out.println("errorString: "+(errorString==null));
 										if (errorString != null) {
 											%>
 											<div

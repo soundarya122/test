@@ -46,14 +46,11 @@ public class TopicFilter implements Filter {
 		// place your code here
 		HttpServletRequest request = (HttpServletRequest) req;
         HttpServletResponse response = (HttpServletResponse) resp;
-        System.out.println("----3) TopicFilter FILTER.... >> " + request.getServletPath());
+//        System.out.println("----3) TopicFilter FILTER.... >> " + request.getServletPath());
         String Uri = request.getServletPath().toLowerCase();
         
         for(int i=0; i<servlets.size(); i++) {
-        	System.out.println("uri: "+ Uri);
-        	System.out.println("servlets: "+ servlets.get(i).toLowerCase());
         	if(Uri.contains(servlets.get(i).toLowerCase())) {
-        		System.out.println("-- "+servlets.get(i));
         		String servlet = "/WEB-INF/views/"+servlets.get(i)+".jsp";
         		RequestDispatcher dispatcher = req.getServletContext().getRequestDispatcher(servlet);
         		dispatcher.forward(request, response);
