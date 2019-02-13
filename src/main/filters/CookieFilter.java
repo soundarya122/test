@@ -34,6 +34,10 @@ public class CookieFilter implements Filter {
 		String Uri = req.getServletPath();
 		HttpSession session = req.getSession(false);
 
+		if(Uri.startsWith("/dist") || Uri.startsWith("/vendors")) {
+			chain.doFilter(request, response);
+			return;
+		}
 		if(Uri.equals("/login")) {
 			chain.doFilter(request, response);
 			return;
