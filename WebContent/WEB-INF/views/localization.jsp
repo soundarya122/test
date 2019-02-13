@@ -28,7 +28,7 @@
 				<div class="hk-pg-header">
 					<h4 class="hk-pg-title">
 						<span class="pg-title-icon"><span class="feather-icon"><i
-								data-feather="smartphone"></i></span></span>Class Design
+								data-feather="smartphone"></i></span></span>Localization
 					</h4>
 				</div>
 				<!-- /Title -->

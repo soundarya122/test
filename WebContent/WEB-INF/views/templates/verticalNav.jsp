@@ -338,18 +338,28 @@
 						while (entries.hasNext()) {
 							Map.Entry<String, Map> entry = entries.next();
 							String dataTarget = entry.getKey().replace(" ", "_").replace(",", "_").replace(".", "_");
+							String expanded = "false";
+							String collapsed= "collapse";
+							String active="";
+							if(request.getServletPath().contains(dataTarget)){
+								expanded = "true";
+								collapsed = "collapse show";
+								active=" active";
+							}
 				%>
-				<li class="nav-item"><a class="nav-link"
-					href="javascript:void(0);" data-toggle="collapse"
+				<li class="nav-item collapsed <%=active%>"><a class="nav-link"
+					href="javascript:void(0);" data-toggle="collapse" aria-expanded="<%=expanded %>"
 					data-target="#<%=dataTarget%>"> <span class="feather-icon"><i
 							data-feather="layout"></i></span> <span class="nav-link-text"><%=entry.getKey()%></span></a>
 					<%
 						if (entry.getValue() instanceof Map) {
-									Iterator<Map.Entry<String, Map>> subMenuLevel1 = entry.getValue().entrySet().iterator();
-									int counter = 0;
+								Iterator<Map.Entry<String, Map>> subMenuLevel1 = entry.getValue().entrySet().iterator();
+								int counter = 0;
+								
+									
 					%>
 					<ul id="<%=dataTarget%>"
-						class="nav flex-column collapse collapse-level-1">
+						class="nav flex-column <%=collapsed %> collapse-level-1">
 						<li class="nav-item">
 							<ul class="nav flex-column">
 								<%
@@ -358,7 +368,15 @@
 													counter++;
 
 													String s1 = dataTarget + "?topics=" + subEntries1.getValue();
-								%><li class="nav-item"><a class="nav-link" href="<%=s1%>"><%=counter%>)
+													String s2 = ""+subEntries1.getValue();
+													String active1="";
+													if(request.getParameter("topics") != null){
+														if(request.getParameter("topics").equals(s2)){
+															active1 = " active";
+														}
+													}
+													
+								%><li class="nav-item <%=active1 %>"><a class="nav-link" href="<%=s1%>"><%=counter%>)
 										<%=subEntries1.getKey()%></a></li>
 								<%
 									}
