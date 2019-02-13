@@ -38,46 +38,7 @@
 						<section class="hk-sec-wrapper">
 							<!-- <h5 class="hk-sec-title">Mode Switch Table</h5> -->
 							<p class="mb-40"><%=rb.getString("listAllProduct") %></p>
-							<div class="row">
-								<div class="col-sm">
-									<div class="table-wrap">
-										<table class="table tablesaw table-bordered table-hover  mb-0"
-											data-tablesaw-mode="swipe" data-tablesaw-sortable
-											data-tablesaw-sortable-switch data-tablesaw-minimap
-											data-tablesaw-mode-switch>
-											<thead>
-												<tr>
-													<th scope="col" data-tablesaw-sortable-col
-														data-tablesaw-priority="persist">Code</th>
-													<th scope="col" data-tablesaw-sortable-col
-														data-tablesaw-sortable-default-col
-														data-tablesaw-priority="3">Name</th>
-													<th scope="col" data-tablesaw-sortable-col
-														data-tablesaw-priority="2">Price</th>
-													<th scope="col" data-tablesaw-sortable-col
-														data-tablesaw-priority="1"><abbr
-														title="Rotten Tomato Rating">Edit</abbr></th>
-													<th scope="col" data-tablesaw-sortable-col
-														data-tablesaw-priority="4">Delete</th>
-												</tr>
-											</thead>
-											<tbody>
-												<c:forEach items="${productList}" var="product">
-													<tr>
-														<td class="title">${product.code}</td>
-														<td>${product.name}</td>
-														<td>${product.price}</td>
-														<td><a href="editProduct?code=${product.code}">Edit</a>
-														</td>
-														<td><a href="deleteProduct?code=${product.code}">Delete</a>
-														</td>
-													</tr>
-												</c:forEach>
-											</tbody>
-										</table>
-									</div>
-								</div>
-							</div>
+							
 						</section>
 					</div>
 				</div>

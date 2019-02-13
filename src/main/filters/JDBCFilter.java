@@ -37,7 +37,7 @@ public class JDBCFilter implements Filter {
 
 		HttpServletRequest request = (HttpServletRequest) req;
         HttpServletResponse response = (HttpServletResponse) resp;
-        System.out.println("---- jdbcFilter FILTER.... >> " + request.getServletPath());
+        System.out.println("----2) jdbcFilter FILTER.... >> " + request.getServletPath());
         
         String servletPath = request.getServletPath();
         
@@ -46,8 +46,10 @@ public class JDBCFilter implements Filter {
 			lang = "en";
 		ResourceBundle rb = ResourceBundle.getBundle("app", new Locale(lang));
 		HttpSession sess = request.getSession(false);
-		if(sess.getAttribute("rb") == null) {
-			sess.setAttribute("rb", rb);
+		if(sess != null) {
+			if(sess.getAttribute("rb") == null) {
+				sess.setAttribute("rb", rb);
+			}
 		}
         chain.doFilter(request, response);
 	}
