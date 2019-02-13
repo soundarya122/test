@@ -38,11 +38,6 @@ public class UserInfoServlet extends HttpServlet {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
-		UserAccount user = (UserAccount)session.getAttribute("user");
-		if(user == null) {
-			response.sendRedirect(request.getContextPath()+"/login");
-			return;
-		}
 		
 		List<Topic> topicList=null;
 		try {
@@ -73,9 +68,7 @@ public class UserInfoServlet extends HttpServlet {
 		SortedMap<String, Map<String, String>> sortedMap = new TreeMap(new MyCompartor());
 		sortedMap.putAll(listMenus);
 		session.setAttribute("listMenus", sortedMap);
-		
-		
-		request.setAttribute("user", user);
+
 		RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher("/WEB-INF/views/userInfoView.jsp");
 		dispatcher.forward(request, response);
 	}

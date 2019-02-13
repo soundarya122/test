@@ -31,13 +31,18 @@ public class CookieFilter implements Filter {
 		HttpServletRequest req = (HttpServletRequest) request;
 		HttpServletResponse res = (HttpServletResponse) response;
 		System.out.println("---- COOKIE FILTER.... >> " + req.getServletPath());
-
+		String Uri = req.getServletPath();
 		HttpSession session = req.getSession(false);
 
+		if(Uri.equals("/login")) {
+			chain.doFilter(request, response);
+			return;
+		}
 		if(session != null) {
 			UserAccount user = (UserAccount)session.getAttribute("user");
-			if (user != null) {
-				chain.doFilter(request, response);
+			if (user == null) {
+				RequestDispatcher dispatcher = req.getServletContext().getRequestDispatcher("/WEB-INF/views/loginView.jsp");
+				dispatcher.include(request, response);
 				return;
 			}
 		}else {
