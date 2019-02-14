@@ -51,6 +51,8 @@ public class TopicFilter implements Filter {
 //        System.out.println("----3) TopicFilter FILTER.... >> " + request.getServletPath());
         String Uri = request.getServletPath().toLowerCase();
        
+        String lastUrl = request.getHeader("referer");
+        
         for(int i=0; i<servlets.size(); i++) {
         	if(Uri.contains(servlets.get(i).toLowerCase())) {
         		topicFound = true;

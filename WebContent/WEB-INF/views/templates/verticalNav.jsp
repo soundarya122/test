@@ -367,8 +367,13 @@
 													Map.Entry<String, Map> subEntries1 = subMenuLevel1.next();
 													counter++;
 
-													//String s1 = dataTarget + "?topics=" + subEntries1.getValue();
-													String s1 = "#" + subEntries1.getValue();
+													String s1;
+													if(request.getServletPath().contains(dataTarget)){
+														s1 = "#" + subEntries1.getValue();
+													}else{
+														s1 = dataTarget + "?topics=" + subEntries1.getValue();
+													}
+													
 													String s2 = ""+subEntries1.getValue();
 													String active1="";
 													if(request.getParameter("topics") != null){

@@ -106,8 +106,8 @@
 					<section id="resource_bundle" class="hk-sec-wrapper">
 						<!-- <h5 class="hk-sec-title">Mode Switch Table</h5> -->
 						<p class="mb-40">Load messages using resource file</p>
-						<input type="submit" class="btn" onclick="sendInfo1('it', '#result1','resourceBundle')" value="Italy" >
-						<input type="submit" class="btn" onclick="sendInfo1('en', '#result1','resourceBundle')" value="English" >
+						<input type="submit" class="btn btn-primary" onclick="sendInfo1('it', '#result1','resourceBundle')" value="Italy" >
+						<input type="submit" class="btn btn-primary" onclick="sendInfo1('en', '#result1','resourceBundle')" value="English" >
 						<span id="result1" style="padding: 10px;">Hello</span> 
 					</section>
 				</div>
