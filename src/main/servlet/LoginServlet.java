@@ -60,21 +60,19 @@ public class LoginServlet extends HttpServlet {
 		}else {
 			try {
 				conn = ConnectionUtils.getConnection();
-				user = DBUtils.findUser(conn, username);
+				user = DBUtils.findUser(conn, username, password);
 				if(user == null) {
 					hasError = true;
 					errorString = "Username or password invalid";
 				}
 			}catch(SQLException | ClassNotFoundException e) {
 				e.printStackTrace();
-				errorString = e.getMessage();
+				hasError = true;
+				errorString = "Database connection error!";
 			}
 		}
 		if(hasError) {
-			user = new UserAccount(username, password);
 			request.setAttribute("errorString", errorString);
-			request.setAttribute("user", user);
-			
 			RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher("/WEB-INF/views/loginView.jsp");
 			dispatcher.forward(request, response);
 		}else {

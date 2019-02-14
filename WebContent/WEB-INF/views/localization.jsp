@@ -77,7 +77,7 @@
 
 			<div class="row">
 				<div class="col-xl-12">
-					<section class="hk-sec-wrapper">
+					<section id="properties_file" class="hk-sec-wrapper">
 						<!-- <h5 class="hk-sec-title">Mode Switch Table</h5> -->
 						<p class="mb-40">1. Get list of available locales</p>
 						<form name="vinform">Display Country 
@@ -103,7 +103,7 @@
 
 			<div class="row">
 				<div class="col-xl-12">
-					<section class="hk-sec-wrapper">
+					<section id="resource_bundle" class="hk-sec-wrapper">
 						<!-- <h5 class="hk-sec-title">Mode Switch Table</h5> -->
 						<p class="mb-40">Load messages using resource file</p>
 						<input type="submit" class="btn" onclick="sendInfo1('it', '#result1','resourceBundle')" value="Italy" >

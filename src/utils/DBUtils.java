@@ -13,14 +13,14 @@ import main.beans.UserAccount;
 
 public class DBUtils {
 
-	public static UserAccount findUser(Connection conn, String username) throws SQLException {
-		String sql = "select a.user_name, a.password, a.gender from user_account a where a.user_name = ?";
+	public static UserAccount findUser(Connection conn, String username, String password) throws SQLException {
+		String sql = "select a.user_name, a.password, a.gender from user_account a where a.user_name = ? and a.password = ?";
 		PreparedStatement pstm = conn.prepareStatement(sql);
 		pstm.setString(1, username);
+		pstm.setString(2, password);
 		ResultSet rs = pstm.executeQuery();
 
 		if (rs.next()) {
-			String password = rs.getString("password");
 			String gender = rs.getString("Gender");
 			UserAccount user = new UserAccount(username, password, gender);
 			return user;

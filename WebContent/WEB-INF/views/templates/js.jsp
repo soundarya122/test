@@ -21,8 +21,17 @@
 <script src="vendors/jquery-toggles/toggles.min.js"></script>
 <script src="dist/js/toggle-data.js"></script>
 
+<!-- Owl JavaScript -->
+<script src="vendors/owl.carousel/dist/owl.carousel.min.js"></script>
+
 <!-- FeatherIcons JavaScript -->
 <script src="dist/js/feather.min.js"></script>
 
+<!-- Gallery JavaScript -->
+<script src="vendors/lightgallery/dist/js/lightgallery-all.min.js"></script>
+<script src="dist/js/froogaloop2.min.js"></script>
+
 <!-- Init JavaScript -->
+<script src="dist/js/lightgallery-all.js"></script>
 <script src="dist/js/init.js"></script>
+<script src="dist/js/landing-data.js"></script>

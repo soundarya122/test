@@ -367,7 +367,8 @@
 													Map.Entry<String, Map> subEntries1 = subMenuLevel1.next();
 													counter++;
 
-													String s1 = dataTarget + "?topics=" + subEntries1.getValue();
+													//String s1 = dataTarget + "?topics=" + subEntries1.getValue();
+													String s1 = "#" + subEntries1.getValue();
 													String s2 = ""+subEntries1.getValue();
 													String active1="";
 													if(request.getParameter("topics") != null){
@@ -376,7 +377,7 @@
 														}
 													}
 													
-								%><li class="nav-item <%=active1 %>"><a class="nav-link" href="<%=s1%>"><%=counter%>)
+								%><li class="nav-item <%=active1 %>"><a class="nav-link" data-scroll href="<%=s1%>"><%=counter%>)
 										<%=subEntries1.getKey()%></a></li>
 								<%
 									}
