@@ -60,37 +60,40 @@
 								<div class="button-list mb-15">
 									<a class="btn btn-primary" data-toggle="collapse"
 										href="#collapseExample" role="button" aria-expanded="false"
-										aria-controls="collapseExample"> Insert new row </a>
+										aria-controls="collapseExample"> Insert new row </a><span
+										id="msg">message</span>
 								</div>
 								<div class="collapse" id="collapseExample">
 									<div class="card card-body">
 
 										<div class="row">
 											<div class="col-sm">
-												<form id="form1" name="form1" method="get">
+												<form id="form1" name="form1" method="post" class="needs-validation" novalidate>
 													<div class="row">
-													<input id="t2"  type="text" value="<%=spath %>" hidden />
+														<input id="t2" type="text" value="<%=spath%>" hidden />
 														<div class="col-md-3 form-group">
-															<label for="firstName">Code</label> <input
-																class="form-control" name="pCode" placeholder=""
-																value="" type="text">
+															<label for="firstName" for="validationCustom01">Code</label> <input
+																class="form-control" name="pCode" id="validationCustom01" placeholder="" required
+																value="" type="text"><div class="invalid-feedback">
+                                                    Please provide a valid city.
+                                                </div>
 														</div>
 														<div class="col-md-4 form-group">
 															<label for="lastName">Name</label> <input
-																class="form-control" name=pName placeholder=""
-																value="" type="text">
+																class="form-control" name=pName  placeholder="" value="" required
+																type="text">
 														</div>
 														<div class="col-md-3 form-group">
 															<label for="lastName">Price</label> <input
-																class="form-control" name="pPrice" placeholder=""
+																class="form-control" name="pPrice" placeholder="" required
 																value="" type="text">
 														</div>
-														<div class="col-md-2 form-group">
-															<label for="lastName">&nbsp;</label> <span onclick="formSubmit();">Calculate</span>
+														<div class="col-md-2 form-group" style="flex-direction: column-reverse;display: flex;">
+															 <button class="btn btn-primary" type="button" onclick="abc()">Submit form</button>
 														</div>
 													</div>
 												</form>
-												
+
 											</div>
 										</div>
 
@@ -99,25 +102,52 @@
 
 							</div>
 						</div>
-						
-						<div name="result" />
 
-<script type="text/javascript"
-	src="//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
-<script type="text/javascript">
-function formSubmit(){
-	
-	
-	
-	 $.ajax({
-	     url:$('#t2').val()+"/controller?id=jdbc",
-	     data: $("#form1").serialize(),
-	     success: function (data) {
-	            $('#result').html(data);
-	    }
-	});
-	}
-</script>
+
+ 
+
+						<span id="result1" style="padding: 10px;">Hello</span> 
+
+						<script type="text/javascript">
+						function abc(){
+							
+							console.log($("#form1").valid());
+							if($("#form1").valid())
+								{
+								
+								 $.ajax({
+										url : $('#t2').val()
+												+ "/controller?id=jdbc",
+										data : $("#form1").serialize(),
+										success : function(data) {
+											$('#result1').text(data);
+											
+											// $("#form1").validate().cancelSubmit = true;
+											 $('#form1')[0].reset();
+											 
+										}
+									});
+								
+								}
+							return;
+							$("#form1").validate({
+								  success: function(){
+									  
+								  },
+								  submitHandler: function() {
+									 
+								  }
+								});
+/* 							$('#form1')[0].reset();
+					        $('#form1').validate({
+					            ignore: "#form1 *"
+					        });
+ */							//validator.resetForm();
+							
+						}
+						
+						</script>
+
 
 
 						<div class="row">

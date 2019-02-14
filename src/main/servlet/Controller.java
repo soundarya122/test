@@ -11,6 +11,7 @@ import java.util.Locale;
 import java.util.ResourceBundle;
 import java.util.stream.Collectors;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -67,7 +68,14 @@ public class Controller extends HttpServlet {
 		if(selectedTopic.equals("jdbc")) {
 			String pCode = req.getParameter("pCode");
 			String pName = req.getParameter("pName");
-			Float pPrice = Float.parseFloat(req.getParameter("pPrice"));
+			Float pPrice = 0f;
+			PrintWriter out = resp.getWriter();
+			try {
+				pPrice = Float.parseFloat(req.getParameter("pPrice"));
+			}catch(Exception e) {
+				out.println(e.getMessage());
+				return;
+			}
 			
 			Product product = new Product(pCode, pName, pPrice);
 			
@@ -83,15 +91,14 @@ public class Controller extends HttpServlet {
 			}
 			
 			List<Product> list = null;
+			
 			try {
 				DBUtils.insertProduct(conn, product);
-				list = DBUtils.queryProduct(conn);
+				out.println("Data inserted successfully.");
 			}catch(SQLException e) {
+				out.println(e.getMessage());
 				e.printStackTrace();
 			}
-			
-			
-			
 		}
 			
 	}
