@@ -92,6 +92,7 @@
 															 <button class="btn btn-primary" type="button" onclick="abc()">Submit form</button>
 														</div>
 													</div>
+													<span id="result1" style="padding: 10px;">Hello</span> 
 												</form>
 
 											</div>
@@ -106,44 +107,23 @@
 
  
 
-						<span id="result1" style="padding: 10px;">Hello</span> 
+						
 
 						<script type="text/javascript">
 						function abc(){
-							
 							console.log($("#form1").valid());
 							if($("#form1").valid())
-								{
-								
-								 $.ajax({
-										url : $('#t2').val()
-												+ "/controller?id=jdbc",
-										data : $("#form1").serialize(),
-										success : function(data) {
-											$('#result1').text(data);
-											
-											// $("#form1").validate().cancelSubmit = true;
-											 $('#form1')[0].reset();
-											 
-										}
-									});
-								
-								}
-							return;
-							$("#form1").validate({
-								  success: function(){
-									  
-								  },
-								  submitHandler: function() {
-									 
-								  }
+							{
+							 $.ajax({
+									url : $('#t2').val()
+											+ "/controller?id=jdbc",
+									data : $("#form1").serialize(),
+									success : function(data) {
+										$('#result1').text(data);
+										 $('#form1')[0].reset();
+									}
 								});
-/* 							$('#form1')[0].reset();
-					        $('#form1').validate({
-					            ignore: "#form1 *"
-					        });
- */							//validator.resetForm();
-							
+							}
 						}
 						
 						</script>

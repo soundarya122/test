@@ -4,8 +4,11 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+
+import com.sun.corba.se.spi.orbutil.fsm.State;
 
 import main.beans.Product;
 import main.beans.Topic;
@@ -40,11 +43,19 @@ public class DBUtils {
 	}
 	public static void insertProduct(Connection conn, Product product) throws SQLException{
 		String sql = "insert into product(code, name, price) values(?,?,?)";
-		PreparedStatement pstm = conn.prepareStatement(sql);
+//		String sql = "insert into product(code, name, price) values("+product.getCode()+","+product.getName()+","+product.getPrice()+")";
+		//Statement stm = conn.createStatement();
+		//ResultSet rs = stm.executeQuery(sql);
+		
+		PreparedStatement pstm = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 		pstm.setString(1, product.getCode());
 		pstm.setString(2, product.getName());
 		pstm.setFloat(3, product.getPrice());
-		pstm.executeUpdate();
+		int rs = pstm.executeUpdate();
+		
+		ResultSet genKeys = pstm.getGeneratedKeys();
+		/*pstm.executeUpdate();*/
+		System.out.println(genKeys);
 	}
 	public static List<Topic> topics(Connection conn) throws SQLException{
 		String sql = "select a.id, a.name, b.id as parentId, b.name as parent, a.link from sub_topics as a right join topics as b on a.topic_id = b.id";

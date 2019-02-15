@@ -98,6 +98,10 @@ public class Controller extends HttpServlet {
 			}catch(SQLException e) {
 				out.println(e.getMessage());
 				e.printStackTrace();
+			}finally {
+				try {
+					conn.close();
+				}catch(SQLException e) {}
 			}
 		}
 			
